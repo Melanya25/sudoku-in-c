@@ -60,6 +60,17 @@ bool fill_board(int board[SIZE][SIZE], int row, int col){
     }
     return false;
 }
+void fill_Diagonal_Subgrid(int board[SIZE][SIZE], int row, int col) {
+    int num;
+    for(int i = 0; i < SUBGRID; i++) {
+        for(int j = 0; j < SUBGRID; j++) {
+            do {
+                num = rand() % SIZE + 1;
+            } while(!is_Safe(board, row + i, col + j, num));
+            board[row + i][col + j] = num;
+        }
+    }
+}
 // Создание решенной доски Судоку
 void generate_Solved_Sudoku(int board[SIZE][SIZE]) {
     srand(time(0));
@@ -75,7 +86,7 @@ void create_Puzzle(int board[SIZE][SIZE], int difficulty){
 
     int remove_num; //уровень сложности
 
-    switch difficulty{
+    switch (difficulty){
         case 1: remove_num(40); break; //легкий
         case 2: remove_num(50); break; //средний
         case 3: remove_num(60); break; //сложный
